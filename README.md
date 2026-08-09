@@ -55,11 +55,13 @@ Run that via your MySQL client of choice (`mysql -u root -e "..."`, phpMyAdmin, 
 
 ```bash
 php artisan migrate --seed   # creates the projects table and seeds it from test_data.json
-composer dev                 # runs `artisan serve` + Vite dev server concurrently
+composer dev                 # runs artisan serve + queue:listen + pail + `npm run dev` (Vite) together, one terminal
 ```
 
 - UI: `http://localhost:8000/projects`
 - REST API: `http://localhost:8000/api/projects` (see Architecture below — independently testable with `curl`/Postman, no UI required)
+
+Prefer separate terminals instead of one combined process? Run `php artisan serve` in one and `npm run dev` in another — same result, just split across windows.
 
 If your MySQL's default storage engine isn't InnoDB, note that `config/database.php` already forces `'engine' => 'InnoDB'` for the `mysql` connection — no extra setup needed there.
 
